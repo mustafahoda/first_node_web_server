@@ -1,19 +1,24 @@
-var http=require('http')
+var express = require('express');
 
-var server=http.createServer((function(request, response)
-  {
-    response.writeHead(200,
-      {"Content-Type": "text/html"});
+var app = express();
+app.set('view engine', 'jade');
 
-    response.end("Hello World \n");
-  }));
+app.route('/Node').get(function(req, res)
+{
+  res.send("Tutorial on Node");
+})
 
-server.listen(7000);
+app.route('/Angular').get(function(req, res)
+{
+  res.send("Tutorial on Angular")
+})
 
-var request = require("request");
+app.get('/', function(req, res){
+  res.render('index',
+    {title:'Guru99', message:'Welcome'}
+  );
+});
 
-request("http://www.google.com", function(error, response, body)
-  {
-    console.log(body)
-  }
-);
+var server = app.listen(3000, function() {
+
+})
